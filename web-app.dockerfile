@@ -26,7 +26,7 @@ RUN pip3 install \
 	
 
 # Add demo app
-COPY webserver/Project/ /Project
+COPY web-app/Project/ /Project
 WORKDIR /Project
 #ENTRYPOINT ["python3", "app.py", "0.0.0.0:80"]
 # gunicorn example:app -w 4 -k uvicorn.workers.UvicornWorker
