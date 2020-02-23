@@ -1,8 +1,11 @@
 FROM ubuntu:18.04
 LABEL maintainer="Chris Buckner<christopher.d.buckner@gmail.com>"
 
-# This is to support noninteractive apt-get installs
+# set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 EXPOSE 80
 
 RUN apt-get update && apt-get install -y \
