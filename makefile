@@ -1,13 +1,15 @@
 NGINX_IMAGE_NAME=ng
 NGINX_CONTAINER_NAME=ng_container
-FALCON_IMAGE_NAME=falcon
-FALCON_CONTAINER_NAME=falcon_container
-FALCON_CONTAINER_NAME_2=falcon_container
-FALCON_CONTAINER_NAME_3=falcon_container
+WEBSERVER_IMAGE_NAME=webserver
+WEBSERVER_CONTAINER_NAME=webserver_container
+WEBSERVER_CONTAINER_NAME_2=webserver_container
+WEBSERVER_CONTAINER_NAME_3=webserver_container
+API_IMAGE_NAME=api
+API_CONTAINER_NAME=api_container
 
 help:
 	echo "\n*** Makefile Commands ***\nbuild-nginx\\nrun-nginx\nshell-nginx\nkill-nginx\n\n\
-build-falcon\nrun-falcon\nrun-falcon-1\nshell-falcon\nshellfalcon-2\ntest-falcon\nkill-falcon\n"
+build-webserver\nrun-webserver\nrun-webserver-2\nshell-webserver\nshellwebserver-2\nkill-webserver\nkill-webserver-2\n"
 
 build-nginx:
 	docker build -t $(NGINX_IMAGE_NAME) -f nginx.dockerfile .
@@ -20,24 +22,26 @@ test-nginx:
 kill-nginx:
 	docker rm $(NGINX_CONTAINER_NAME) -f
 
-build-falcon:
-	docker build -t $(FALCON_IMAGE_NAME) -f falcon.dockerfile .
-run-falcon:
-	docker run -p 9000:80 -d --rm --name $(FALCON_CONTAINER_NAME) $(FALCON_IMAGE_NAME)
-run-falcon-2:
-	docker run -p 9001:80 -d --rm --name $(FALCON_CONTAINER_NAME) $(FALCON_IMAGE_NAME_2)
-shell-falcon:
-	docker exec -it $(FALCON_CONTAINER_NAME) bash
-shell-falcon-2:
-	docker exec -it $(FALCON_CONTAINER_NAME_2) bash
-test-falcon:
-	docker run -it $(FALCON_IMAGE_NAME) /bin/bash
-kill-falcon:
-	docker rm $(FALCON_CONTAINER_NAME) -f
+# need to get the below working ...
+
+build-webserver:
+	docker build -t $(WEBSERVER_IMAGE_NAME) -f webserver.dockerfile .
+run-webserver:
+	docker run -p 9000:80 -d --rm --name $(WEBSERVER_CONTAINER_NAME) $(WEBSERVER_IMAGE_NAME)
+run-webserver-2:
+	docker run -p 9001:80 -d --rm --name $(WEBSERVER_CONTAINER_NAME) $(WEBSERVER_IMAGE_NAME_2)
+shell-webserver:
+	docker exec -it $(WEBSERVER_CONTAINER_NAME) bash
+shell-webserver-2:
+	docker exec -it $(WEBSERVER_CONTAINER_NAME_2) bash
+test-webserver:
+	docker run -it $(WEBSERVER_IMAGE_NAME) /bin/bash
+kill-webserver:
+	docker rm $(WEBSERVER_CONTAINER_NAME) -f
 
 clean:
 	docker system prune
-	make kill-falcon
+	make kill-webserver
 	make kill-nginx
 
 blah:

@@ -14,12 +14,16 @@ RUN apt-get update && apt-get install -y \
 	curl \
 	vim
 
-RUN pip3 install --no-binary :all: falcon
-RUN pip3 install cython \
-	bjoern
+RUN pip3 install \
+	fastapi[all]
+	gunicorn \
+	uvicorn \
+	jinja2 \
+	aiofiles
+	
 
 # Add demo app
-COPY falcon/Project/ /Project
+COPY webserver/Project/ /Project
 WORKDIR /Project
 #ENTRYPOINT ["python3", "app.py", "0.0.0.0:80"]
-
+# gunicorn example:app -w 4 -k uvicorn.workers.UvicornWorker
