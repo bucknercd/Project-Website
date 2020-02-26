@@ -14,4 +14,4 @@ RUN rm /etc/nginx/conf.d/default.conf
 RUN rm /usr/share/nginx/html -r
 COPY nginx/default.conf /etc/nginx/conf.d
 COPY nginx/nginx.conf /etc/nginx
-COPY html_bootstrap/ /usr/share/nginx/
+COPY bootstrap_html /usr/share/nginx/
