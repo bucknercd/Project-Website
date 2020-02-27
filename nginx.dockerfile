@@ -5,6 +5,7 @@ LABEL maintainer="Chris Buckner<christopher.d.buckner@gmail.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
+	nginx-extras \
 	net-tools \
 	telnet \
 	curl \
