@@ -1,49 +1,59 @@
-NGINX_IMAGE_NAME=ng
-NGINX_CONTAINER_NAME=ng_container
-WEBAPP_IMAGE_NAME=web-app
-WEBAPP_CONTAINER_NAME=web-app_container
-WEBAPP_CONTAINER_NAME_2=web-app_container_2
-WEBAPP_CONTAINER_NAME_3=web-app_container_3
-API_IMAGE_NAME=api
-API_CONTAINER_NAME=api_container
+NGINX_IMAGE=ng
+NGINX_CONTAINER=ng_container
+WEBAPP_IMAGE=web-app
+WEBAPP_CONTAINER=web-app_container
+WEBAPP_CONTAINER_2=web-app_container_2
+WEBAPP_CONTAINER_3=web-app_container_3
+API_IMAGE=api
+API_CONTAINER=api_container
+MONGO_IMAGE=mongo_image
+MONGO_CONTAINER=mongo_container
 
 help:
 	echo "\n*** Makefile Commands ***\nbuild-nginx\\nrun-nginx\nshell-nginx\nkill-nginx\n\n\
-build-web-app\nrun-web-app\ntest-web-app\nrun-web-app-2\nrun-web-app-3\nshell-web-app\nshellweb-app-2\nkill-web-app\nkill-web-app-2\n"
+build-web-app\nrun-web-app\ntest-web-app\nrun-web-app-2\nrun-web-app-3\nshell-web-app\nkill-web-app\nkill-web-app-2\nkill-web-app-3\n\n\
+build-mongo\nrun-mongo\n"
 
 build-nginx:
-	docker build -t $(NGINX_IMAGE_NAME) -f nginx.dockerfile .
+	docker build -t $(NGINX_IMAGE) -f nginx.dockerfile .
 run-nginx:
-	docker run -p 8080:80 -d --rm --name $(NGINX_CONTAINER_NAME) $(NGINX_IMAGE_NAME)
+	docker run -p 8080:80 -d --rm --name $(NGINX_CONTAINER) $(NGINX_IMAGE)
 shell-nginx:
-	docker exec -it $(NGINX_CONTAINER_NAME) bash
+	docker exec -it $(NGINX_CONTAINER) bash
 test-nginx:
-	docker run -p 8080:80 --rm --name $(NGINX_CONTAINER_NAME) $(NGINX_IMAGE_NAME)
+	docker run -p 8080:80 --rm --name $(NGINX_CONTAINER) $(NGINX_IMAGE)
 kill-nginx:
-	docker rm $(NGINX_CONTAINER_NAME) -f
+	docker rm $(NGINX_CONTAINER) -f
 
-# need to get the below working ...
 
 build-web-app:
-	docker build -t $(WEBAPP_IMAGE_NAME) -f web-app.dockerfile .
+	docker build -t $(WEBAPP_IMAGE) -f web-app.dockerfile .
 run-web-app:
-	docker run -p 9000:80 -d --rm --name $(WEBAPP_CONTAINER_NAME) $(WEBAPP_IMAGE_NAME)
+	docker run -p 9000:80 -d --rm --name $(WEBAPP_CONTAINER) $(WEBAPP_IMAGE)
 run-web-app-2:
-	docker run -p 9001:80 -d --rm --name $(WEBAPP_CONTAINER_NAME_2) $(WEBAPP_IMAGE_NAME)
+	docker run -p 9001:80 -d --rm --name $(WEBAPP_CONTAINER_2) $(WEBAPP_IMAGE)
 run-web-app-3:
-	docker run -p 9002:80 -d --rm --name $(WEBAPP_CONTAINER_NAME_3) $(WEBAPP_IMAGE_NAME)
+	docker run -p 9002:80 -d --rm --name $(WEBAPP_CONTAINER_3) $(WEBAPP_IMAGE)
 shell-web-app:
-	docker exec -it $(WEBAPP_CONTAINER_NAME) bash
-shell-web-app-2:
-	docker exec -it $(WEBAPP_CONTAINER_NAME_2) bash
+	docker exec -it $(WEBAPP_CONTAINER) bash
 test-web-app:
-	docker run -it -p 9000:80 --rm --name $(WEBAPP_CONTAINER_NAME) $(WEBAPP_IMAGE_NAME) /bin/bash
+	docker run -it -p 9000:80 --rm --name $(WEBAPP_CONTAINER) $(WEBAPP_IMAGE) /bin/bash
 kill-web-app:
-	docker rm $(WEBAPP_CONTAINER_NAME) -f
+	docker rm $(WEBAPP_CONTAINER) -f
 kill-web-app-2:
-	docker rm $(WEBAPP_CONTAINER_NAME_2) -f
+	docker rm $(WEBAPP_CONTAINER_2) -f
 kill-web-app-3:
-	docker rm $(WEBAPP_CONTAINER_NAME_3) -f
+	docker rm $(WEBAPP_CONTAINER_3) -f
+
+
+build-mongo:
+	docker build -t $(MONGO_IMAGE) -f mongodb.dockerfile .
+test-mongo:
+	docker run --rm --name $(MONGO_CONTAINER) $(MONGO_IMAGE)
+run-mongo:
+	docker run --rm --name $(MONGO_CONTAINER) $(MONGO_IMAGE)
+
+
 clean:
 	docker system prune
 	make kill-nginx

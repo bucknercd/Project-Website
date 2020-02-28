@@ -30,13 +30,13 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About Me</a>
+            <a class="nav-link" href="/about.html">About Me</a>
           </li>
       <li class="nav-iem">
             <a class="nav-link" href="/ws/blog">Blog</a>
       </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="/contact.html">Contact</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -44,16 +44,28 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
               <a class="dropdown-item" href="/images/valeriaychris.jpeg">The Happy Couple</a>
-              <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
-              <a class="dropdown-item" href="faq.html">FAQ</a>
-              <a class="dropdown-item" href="404.html">404</a>
-              <a class="dropdown-item" href="pricing.html">Pricing Table</a>
+              <a class="dropdown-item" href="/sidebar.html">Sidebar Page</a>
+              <a class="dropdown-item" href="/faq.html">FAQ</a>
+              <a class="dropdown-item" href="/404.html">404</a>
+              <a class="dropdown-item" href="/pricing.html">Pricing Table</a>
             </div>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
+<!-- other templates go here -->
+	{% block content %}{% endblock %}
+<!-- end other templates -->
+
+<!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 
 <!-- Bootstrap core JavaScript -->
   <script src="/vendor/jquery/jquery.min.js"></script>
