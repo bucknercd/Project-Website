@@ -49,7 +49,7 @@ kill-web-app-3:
 build-mongo:
 	docker build -t $(MONGO_IMAGE) -f mongodb.dockerfile .
 test-mongo:
-	docker run --rm --name $(MONGO_CONTAINER) $(MONGO_IMAGE)
+	docker run -it --rm --name $(MONGO_CONTAINER) $(MONGO_IMAGE) /bin/bash
 run-mongo:
 	docker run --rm --name $(MONGO_CONTAINER) $(MONGO_IMAGE)
 
