@@ -46,6 +46,9 @@ kill-web-app-3:
 	docker rm $(WEBAPP_CONTAINER_3) -f
 
 
+build-api:
+	echo 'build-api'
+
 build-mongo:
 	docker build -t $(MONGO_IMAGE) -f mongodb.dockerfile .
 test-mongo:

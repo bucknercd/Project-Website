@@ -4,13 +4,21 @@ from starlette.requests import Request
 
 app = FastAPI()
 
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory='templates')
 
+@app.get('/')
+async def get_index(request: Request):
+	return templates.TemplateResponse('index.html', {'request' : request})
 
-@app.get('/ws/blog')
+@app.get('/blog')
 async def get_blog(request: Request):
-    return templates.TemplateResponse("blog.html", {'request' : request})
+    return templates.TemplateResponse('blog.html', {'request' : request})
 
-@app.get('/ws/base.html')
+@app.get('/about')
+async def get_about(request: Request):
+	return templates.TemplateResponse('about.html', {'request' : request})
+
+
+@app.get('/base')
 async def get_base(request: Request):
-    return templates.TemplateResponse("base.html", {'request': request})
+    return templates.TemplateResponse('base.html', {'request': request})
