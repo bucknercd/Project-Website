@@ -17,11 +17,11 @@ build-mongo\nrun-mongo\n"
 build-nginx:
 	docker build -t $(NGINX_IMAGE) -f nginx.dockerfile .
 run-nginx:
-	docker run -p 8080:80 -d --rm --name $(NGINX_CONTAINER) $(NGINX_IMAGE)
+	docker run -p 443:443 -d --rm --name $(NGINX_CONTAINER) $(NGINX_IMAGE)
 shell-nginx:
 	docker exec -it $(NGINX_CONTAINER) bash
 test-nginx:
-	docker run -p 8080:80 --rm --name $(NGINX_CONTAINER) $(NGINX_IMAGE)
+	docker run -p 443:443 --rm --name $(NGINX_CONTAINER) $(NGINX_IMAGE)
 kill-nginx:
 	docker rm $(NGINX_CONTAINER) -f
 
