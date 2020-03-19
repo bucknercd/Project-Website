@@ -6,7 +6,7 @@ WEBAPP_CONTAINER_2=web-app_container_2
 WEBAPP_CONTAINER_3=web-app_container_3
 API_IMAGE=api
 API_CONTAINER=api_container
-MONGO_IMAGE=mongo_image
+MONGO_IMAGE=mongo
 MONGO_CONTAINER=mongo_container
 
 help:
@@ -37,7 +37,7 @@ run-web-app-3:
 shell-web-app:
 	docker exec -it $(WEBAPP_CONTAINER) bash
 test-web-app:
-	docker run -it -p 9000:80 --rm --name $(WEBAPP_CONTAINER) $(WEBAPP_IMAGE) /bin/bash
+	docker run -it -p 9000:80 --rm --name $(WEBAPP_CONTAINER) $(WEBAPP_IMAGE)
 kill-web-app:
 	docker rm $(WEBAPP_CONTAINER) -f
 kill-web-app-2:
@@ -47,7 +47,14 @@ kill-web-app-3:
 
 
 build-api:
-	echo 'build-api'
+	docker build -t $(API_IMAGE) -f api.dockerfile .
+run-api:
+	docker run -p 9100:80 -d --rm --name $(API_CONTAINER) $(API_IMAGE)
+shell-api:
+	docker exec -it $(API_CONTAINER) bash
+test-api:
+	docker run -p 9100:80 --rm --name $(API_CONTAINER) $(API_IMAGE)
+
 
 build-mongo:
 	docker build -t $(MONGO_IMAGE) -f mongodb.dockerfile .
