@@ -1,4 +1,4 @@
-from ubuntu:18.04
+from mongo
 LABEL maintainer="Chris Buckner<christopher.d.buckner@gmail.com>"
 
 # This is to support noninteractive apt-get installs
@@ -8,5 +8,5 @@ RUN apt-get update && apt-get install -y \
 	net-tools \
 	vim \
 	curl \
-	telnet \
-	mongodb
+	telnet 
+

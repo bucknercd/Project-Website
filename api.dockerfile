@@ -23,6 +23,7 @@ RUN pip3 install \
 	uvicorn \
 	aiofiles \
 	pymongo
+	# motor
 	
 # Add demo app
 COPY api/Project/ /Project
